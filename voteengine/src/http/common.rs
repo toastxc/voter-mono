@@ -8,6 +8,9 @@ impl RNG {
     pub fn large() -> u64 {
         rand::random()
     }
+    pub fn vlarge() -> u128 {
+        rand::random()
+    }
 }
 
 #[derive(Debug)]
@@ -33,5 +36,19 @@ pub fn encrypt(password: &str) -> Result<String, EnErr> {
     match argon2::verify_encoded(&hash, password) {
         Ok(true) => Ok(hash),
         _ => Err(EnErr::Verify),
+    }
+}
+
+pub fn mkecrypt() {
+    let content = RNG::vlarge();
+
+    println!("no salt found, generating....\nwarning: all old data is now invalid");
+    match std::fs::write("salt.txt", content.to_string()) {
+        Ok(_) => {
+            println!("done")
+        }
+        Err(e) => {
+            panic!("failed to create encryption salt\n{e}")
+        }
     }
 }
