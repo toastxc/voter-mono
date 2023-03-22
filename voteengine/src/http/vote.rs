@@ -29,7 +29,6 @@ pub async fn makevote(user: String, data: DataUserVote) -> Status {
 
     // password validation
 
-   
     let newen = encrypt(&data.password).unwrap();
 
     if user.password_hash != newen {

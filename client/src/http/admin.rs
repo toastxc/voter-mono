@@ -1,16 +1,8 @@
 use reqwest::StatusCode;
-use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, Clone, Default)]
-pub struct DataAuthRequest {
-    pub id: String,
-    pub key: Option<String>,
-}
-#[derive(Debug)]
-pub enum Error {
-    Http(StatusCode),
-    Json(reqwest::Error),
-}
+use crate::data::admin::DataAuthRequest;
+
+use super::common::Error;
 
 impl DataAuthRequest {
     pub fn new(id: &str, key: Option<&str>) -> Self {
