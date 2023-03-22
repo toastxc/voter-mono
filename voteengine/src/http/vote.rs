@@ -1,9 +1,10 @@
-use crate::{
-    data::{db::DB, vote::whole_validate},
-    DataUserVote,
-};
 use bson::doc;
 use rocket::http::Status;
+
+use crate::data::{
+    db::DB,
+    vote::{whole_validate, DataUserVote},
+};
 
 use super::common::encrypt;
 pub async fn makevote(user: String, data: DataUserVote) -> Status {

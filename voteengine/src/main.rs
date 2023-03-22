@@ -1,21 +1,12 @@
-use crate::data::users::{DataUserRegister, User};
-use data::{auth::DataAuthRequest, vote::DataUserVote};
-use http::common::EnErr;
 use rocket::{http::Status, serde::json::Json};
-
-pub mod http {
-    pub mod common;
-    pub mod dev;
-    pub mod user;
-    pub mod vote;
-}
-pub mod data {
-    pub mod auth;
-    pub mod ballot;
-    pub mod db;
-    pub mod users;
-    pub mod vote;
-}
+use voteengine::{
+    data::{
+        auth::DataAuthRequest,
+        users::{DataUserRegister, User},
+        vote::DataUserVote,
+    },
+    http::{self, common::EnErr},
+};
 
 #[macro_use]
 extern crate rocket;
