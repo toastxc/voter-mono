@@ -6,30 +6,21 @@ use super::common::Error;
 
 // Derrives from DataAuthRequest
 pub struct AdminClient {
-    pub id: String,
-    pub key: Option<String>,
+    pub data: DataAuthRequest,
     pub http_client: reqwest::Client,
     pub endpoint: String,
 }
 impl AdminClient {
     pub fn new(id: &str, key: Option<&str>, endpoint: Option<&str>) -> Self {
         Self {
-            id: String::from(id),
-            key: key.map(String::from),
+            data: DataAuthRequest::new(id, key),
             http_client: reqwest::Client::new(),
             endpoint: String::from(endpoint.unwrap_or("http://localhost:8000")),
         }
     }
 
-    fn to_data(&self) -> DataAuthRequest {
-        DataAuthRequest {
-            id: self.id.clone(),
-            key: self.key.clone(),
-        }
-    }
-
     pub async fn generate(&self) -> Result<String, Error> {
-        let data = self.to_data();
+        let data = self.data.clone();
         let endpoint = self.endpoint.clone();
         let response = self
             .http_client
@@ -48,7 +39,7 @@ impl AdminClient {
     }
 
     pub async fn list(&self) -> Result<Vec<String>, Error> {
-        let data = self.to_data();
+        let data = self.data.clone();
         let endpoint = self.endpoint.clone();
         let response = self
             .http_client
@@ -67,7 +58,7 @@ impl AdminClient {
     }
 
     pub async fn delete(&self, key: Option<&str>) -> Result<(), StatusCode> {
-        let original_data = self.to_data();
+        let original_data = self.data.clone();
         let data = match key {
             Some(a) => DataAuthRequest {
                 id: original_data.id.clone(),
