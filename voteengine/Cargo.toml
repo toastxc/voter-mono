@@ -1,0 +1,20 @@
+[package]
+name = "voteengine"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bson = "2.5.0"
+easymongo = "0.1.0"
+futures = "0.3.26"
+mongodb = "2.4.0"
+rand = "0.8.5"
+rocket = { version = "0.5.0-rc.2", features = ["json"] }
+rust-argon2 = "1.0.0"
+serde = { version = "1.0.152", features = ["derive"] }
+serde_json = "1.0.93"
+time = "0.3.20"
+tokio = { version = "1.26.0", features = ["full"] }
+validator = "0.16.0"
