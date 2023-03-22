@@ -1,27 +1,17 @@
-use data::{register::DataUserRegister, vote::VoteRecord};
-
-use crate::data::{
-    auth::DataAuthRequest,
-    register::{DateOfBirth, Electorate, Months},
-    vote::{DataUserVote, WORDLIST},
-};
-
 pub mod data {
-    pub mod auth;
+    pub mod admin;
     pub mod register;
     pub mod vote;
 }
-#[tokio::main]
-async fn main() {
-    //todo userfield builder pattern
-
-    let admin = DataAuthRequest::new("kaiaxc", None);
-
-    let token = admin.generate().await.unwrap();
-
-    admin.delete(Some(&token)).await.unwrap();
+pub mod http {
+    pub mod admin;
+    pub mod common;
+    pub mod user;
 }
+#[tokio::main]
+async fn main() {}
 
+/*
 async fn profile() {
     let curl = reqwest::Client::new()
         .get("http://localhost:8000/profile/3602725565/no")
@@ -101,3 +91,5 @@ pub async fn vote() {
 
     println!("{:#?}", curl.text().await);
 }
+
+*/
