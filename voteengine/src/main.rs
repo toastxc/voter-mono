@@ -1,5 +1,6 @@
 use crate::data::users::{DataUserRegister, User};
 use data::{auth::DataAuthRequest, vote::DataUserVote};
+use http::common::EnErr;
 use rocket::{http::Status, serde::json::Json};
 
 pub mod http {
@@ -64,6 +65,11 @@ async fn test() -> String {
 
 #[launch]
 fn rocket() -> _ {
+    // prerun config
+    if let Err(EnErr::Fs) = crate::http::common::encrypt("example") {
+        crate::http::common::mkecrypt()
+    };
+
     rocket::build().mount(
         "/",
         routes![index, register, keydel, keymake, keyls, test, profile, vote],
