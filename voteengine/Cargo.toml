@@ -11,7 +11,7 @@ easymongo = "0.1.0"
 futures = "0.3.26"
 mongodb = "2.4.0"
 rand = "0.8.5"
-rocket = { version = "0.5.0-rc.2", features = ["json"] }
+rocket = { version = "0.5.0-rc.3", features = ["json"] }
 rust-argon2 = "1.0.0"
 serde = { version = "1.0.158", features = ["derive"] }
 serde_json = "1.0.93"
